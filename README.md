@@ -1,21 +1,35 @@
-## Data Mining Project 4
-## **Charlotte's Neighborhood Crime Over Time Through Clustering Analysis**
+## **Charlotte's Neighborhood Crime Over Time Through Clustering**
 
 ### **Overview**
 For Project 4, the goal is to work with clustering.  Writing is critical here, as the main goal will be to discuss your process, why you take certain steps (e.g., what preprocessing steps and why), and tell a story around your data and insights gained through both modeling (working with the clustering algorithms we learned about) and visualizations. Thus, your writing should portray your critical thinking about the data, the process, and what knowledge you find.
 
-### **Introduction**
+##  **Introduction**
 Crime is a concern for many urban areas in the United States, and Charlotte is no exception. It is important to understand crime patterns and statistics to help communities and law enforcement agencies develop plans, allocate resources, and engage with the community to improve public safety. The Charlotte-Mecklenburg Police Department (CMPD) regularly publishes detailed crime reports. As of July 22, 2024, overall crime in Charlotte has seen a slight increase of 1% compared to the previous year. This includes various types of crimes, categorized broadly into violent crimes and property crimes.
+Previously, [Project 1 ](https://pmb-7684.github.io/Data_Mining_Project_1/) Charlotte's Neighborhood Crime Over Time explored the data through exploratory data analysis. It focused on how much crime changed over time based on the different neighborhoods or divisions. 
 
-For this project, I plan to explore how crime has evolved over time in different communities and how does the location (such as open field, department store, hotel/motel, etc.) of the incident within neighborhoods effective crime? To answer this question, I will use the CMPD_PATROL_DIVISION and the PLACE_DETAIL-DESCRIPTION columns to examine these trends over time. By determining communities that are experiencing higher than normal levels of crime and specific location, the city, local law enforcement, and community can help allocated resources, develop plans and support community outreach to support all neighborhoods.
-https://data.charlottenc.gov/datasets/charlotte::cmpd-incidents-1/about
+For this project, the data will be explored through clustering analysis. Again, the data explored how crime has evolved over time in different communities and how does location (such as open field, department store, hotel/motel, etc.) of the incident within neighborhoods effective crime. The difference is that clustering will be used to explore if certain neighborhood belongs to the same cluster and types of crimes are likely to happen in those clusters. 
+
+By determining communities that are experiencing higher than normal levels of crime and specific location, the city, local law enforcement, and community can help allocated resources, develop plans and support community outreach to support all neighborhoods.
+
+CMPD Data [Portal](https://data.charlottenc.gov/datasets/charlotte::cmpd-incidents-1/about)
+
+City of Charlotte[ GIS](https://maps.mecknc.gov/openmapping/data.html)
+
 
 ### **What is clustering and how does it work?**
-`Explain what clustering is and how it works (e.g., k-means and/or agglomerative that we have gone over in class).`
+`Explain what clustering is and how it works (e.g., k-means and/or agglomerative that we have gone over in class).`<br> 
+`**How does this step relate to your modeling?**` <br> 
+In general, clustering is the process of grouping items with common characteristics into a group.
+
+K-means is an unsupervised algorithm used for clustering. The algorithm works by dividing a group of observations into a predetermined number of clusters. This number of clusters (k) is determined by the user. The user can either randomly select a number or use a method such as "elbow method" to calculate the number of clusters. Then k data are randomly selected to be centroid(center of the cluster). Each observation is assigned to a centroid based on distance to the closest centroid. Once all observations are assigned, recalculate the centroid by taking the average of the points assignment to the cluster. then determine the distance and reassign each observation. The algorithm is repeated until the centroids no longer move, no data points change clusters, or the maximum number of iterations is reached.
+
+Agglomerative Clustering is another clustering algorithm.  It works by splitting and merging the closest pairs of clusters until all the observations belong to a single cluster.
 
 ### **The Dataset**
 
-The dataset is available from the city of Charlotte's open data portal. Data is available in various formats including CSV and contains both criminal and non-criminal incident reports from 2017 through 2024. It contains 688,973 observations and 29 features.  The website does not contain detailed metadata to describe features. So, an attempt was made to define features based on the dataset. Below are descriptions of the less obvious features:
+The dataset is available from the city of Charlotte's open data portal. It is available in various formats including CSV and contains both criminal and non-criminal incident reports from 2017 through 2024. At the time this file was downloaded, it contained 688,973 observations and 29 features.
+
+#### Some Domain and Variable Notes:
 
 •	`X`, `Y` are unknown decimal values.
 
@@ -41,76 +55,141 @@ The dataset is available from the city of Charlotte's open data portal. Data is 
 
 •	`GlobalID` is an unknown alpha-numeric value.
 
-Mainly, I used CMPD_PATROL_DIVISION and the PLACE_DETAIL-DESCRIPTION columns for this project. The CMPD_PATROL_DIVISION column provides the names of the patrol division for a particular area of the city such as "North" and "Steele Creek" divisions. These divisions will represent the neighborhoods. The PLACE_DETAIL-DESCRIPTION provides the location where a crime took place. For example, "Private Resident", "Open Field", and "Air/Bus/Train Terminal". These columns will allow us to compare neighborhoods and look within neighborhoods to see if certain locations have experienced above average crime incidents.
-
-
-### **Data Understanding/Visualization**
-`Use methods to try to further understand and visualize the data. Make sure to remember your initial problems/questions when completing this step.
-While exploring, does anything else stand out to you (perhaps any surprising insights?)`
-
-**How does this step relate to your modeling?**
+The shape of the orginal dataset is (688973, 29).
 
 
 ### **Pre-Processing**
 
-Pre-processing is one of the most important steps. By thoroughly cleaning the data, we will improve the accuracy of our model and save time by removing errors in advance.  After the import, there were no rows removed. Its shape is (688973, 29).
+By thoroughly cleaning the data, we will improve the accuracy of our model and save time by removing errors in advance.  The same pre-processing was completed on this project as completed on project one. Since most of the pre-processing was completed for project 1, below is a summary of task completed.  The following features were not used in the modeling or analysis and removed.
 
-#### Irrelevant and Missing Values
-'X' and 'X_COORD_PUBLIC' contained the same value. The only difference was 'X' was in decimal format and 'X_COORD_PUBLIC' was in integer format. This was the same situation for 'Y' and 'Y_COORD_PUBLIC'. Metadata could not be located on the website to determine the purpose of 'X_COORD_PUBLIC' and 'Y_COORD_PUBLIC'. All four features were removed, since they would not be used for analysis in this project.
-For this project, there is no use for 'LATITUDE_PUBLIC' and ' LONGITUDE_PUBLIC'. Both were removed from the analysis.
-'INCIDENT_REPORT_ID' represents the unique report number associated with each incident. This ID does not offer beneficial information for the project.
-'GlobalID' is an alphanumeric variable. Its purpose could not be determined. So, I decided to remove the column.
-'OBJECTID' seems to be an index for the dataset. I decided to remove this column and create an index after pre-processing the dataset.
+##### **Irrelevant**
 
-Checked for missing values by using CLT_crime.info(). We can see six columns were missing values: STATE, ZIP, CMPD_PATROL-DIVISION, DATE_INCIDENT_END, ADDRESS_DESCRIPTION, and CLEARANCE DATE.
-LOCATION (physical address of the incident), CITY, STATE, and ZIP can be replaced by the DIVISION_ID OR CMPD_PATROL-DIVISION which are better suited in describing where the incident took place. Those four features were removed for this project.
-ADDRESS_DESCRIPTION can also be replaced by the DIVISION_ID OR CMPD_PATROL-DIVISION.
-CMPD_PATROL_DIVISION is a more descriptive version of DIVISION_ID, so we can impute the missing information based on the current values in DIVISION_ID.
-```
-# fillna to address missing values in CMPD_PATROL_DIVISION
-CLT_crime['CMPD_PATROL_DIVISION'] = CLT_crime['CMPD_PATROL_DIVISION'].fillna(CLT_crime['DIVISION_ID'].map(division_mapping))
+`X` and `X_COORD_PUBLIC` contained the same value. The only difference was `X` was in decimal format and  `X_COORD_PUBLIC` was in integer format.  This was the same situation for '`Y` and `Y_COORD_PUBLIC`. 
 
-# drop rows with Na in the CMPD_PATROL_DIVISION column
-CLT_crime = CLT_crime.dropna(subset=['CMPD_PATROL_DIVISION'])
-```
+`INCIDENT_REPORT_ID` represents the unique report number associated with each incident. 
 
-DATE_INCIDENT_END indicates the date that the incident or cases was resolved. I will impute those missing dates with today’s current date. This will provide an accurate measure of the number of days that a case has been open, if I decide to create a column in the future. For the same reason we will retain the CLEARANCE DATE and impute it with the current date.
-```
-# impute replace values with current date
-from datetime import datetime
+`GlobalID` is an alphanumeric variable. Its purpose could not be determined. 
 
-current_date = datetime.now().date()
+`OBJECTID` seems to be an index for the dataset. 
 
-CLT_crime['CLEARANCE_DATE'].fillna(current_date, inplace=True)
-CLT_crime['DATE_INCIDENT_END'].fillna(current_date, inplace=True)
-```
-LOCATION_TYPE_DESCRIPTION provides a high-level location for the incident. This will be replaced with a better feature.
-Data Types Checked
-The data types were checked using CLT_crime.info(). All variables were of type object, except for YEAR, X_COORD_PUBLIC, Y_COORD_PUBLIC, LATITUDE_PUBLIC, LATITUDE_PUBLIC, and NPA. Those data types are fine.
-Index
-Lastly, the data set was indexed using CLT_crime.index = [x for x in range(1, len(CLT_crime.values)+1)] Normally, when data is imported, python automatically creates an index; however, the first row is index as 0 rather than 1. Now, the first row is indexed at 1 and the column is named ID.
-```
-CLT_crime.index = [x for x in range(1, len(CLT_crime.values)+1)]
+`LOCATION` (physical address of the incident), `CITY`, `STATE`, and `ZIP` can be replaced by the DIVISION_ID OR CMPD_PATROL-DIVISION which are better suited in describing where the incident took place.
 
-# add index field name
-CLT_crime.index.name = 'id'
-CLT_crime.head(4)
-```
+##### **Missing Values**
+
+After checking for missing data, there were six columns that were missing values: STATE, ZIP, CMPD_PATROL-DIVISION, DATE_INCIDENT_END, ADDRESS_DESCRIPTION, and CLEARANCE DATE.  STATE and ZIP as stated above were not used and removed.
+
+`CMPD_PATROL_DIVISION` is a more descriptive version of DIVISION_ID, so we can impute the missing information based on the current values in DIVISION_ID.  
+
+`DATE_INCIDENT_END` indicates the date that the incident or cases were resolved.  I will impute those missing dates with today’s current date.  This will provide an accurate measure of the number of days that a case has been open, if I decide to create a column in the future.  For the same reason we will retain the CLEARANCE DATE and impute it with the current date.
+
+`ADDRESS_DESCRIPTION` can also be replaced by the CMPD_PATROL-DIVISION.
+
+`LOCATION_TYPE_DESCRIPTION` provides a high-level location for the incident. This will be replaced with a better feature.
+
+##### **Data Types Checked**
+
+All variables were of type `object`, except for YEAR, X_COORD_PUBLIC, Y_COORD_PUBLIC, LATITUDE_PUBLIC, LATITUDE_PUBLIC, and NPA.  Those data types are numeric.
+
+##### **Index**
+
+Normally, when data is imported, python automatically creates an index; however, the first row is index as 0 rather than 1. Now, the first row is indexed at 1 and the column is named ID. Since we are analyzing clusters, we do not need the ID feature.
+
+The data set contains 14 features and 688,345 observations.
+
+Now that we have a clean file, the data set needs to be transformed.  The cluster analysis will be based on the sixteen divisions and the type of crimes in those divisions.  So, the number of features will be considerably smaller. The following code was used to generate a pivot table.
+
+`CLT_pivot = pd.pivot_table(CLT_group, values='Count',
+                          index='CMPD_PATROL_DIVISION',
+                          columns='HIGHEST_NIBRS_DESCRIPTION', aggfunc='sum', fill_value=0)`
+
+<iframe src="table/CLT_pivot_table.html" style="width:100%; height:600px; border:none;"></iframe>
+
+Next, we need to "normalize"  the data in a non-statistical way.  Below, there are a lot of variances between the data points.   To achieve this let's divide the total crime count by the number of years of crime data available. `CLT_pivot_normalized = CLT_pivot / years` Normalization is beneficial for clustering models like k-means.  This model uses distance between points and extreme values can dominate the results.  
+
+Lastly, the data needs to be standardized. `CLT_standard_norm = pd.DataFrame(StandardScaler().fit_transform(CLT_pivot_normalized ),columns = CLT_pivot_normalized .columns)` This is a requirement for both k-means and agglomerative hierarchical clustering.  It transforms the data to having a mean of 0 and standard deviation of 1.
+
+Finally, we have a dataframe with 72 features and 16 observations.
+
+### **Data Understanding/Visualization**
+`Use methods to try to further understand and visualize the data. Make sure to remember your initial problems/questions when completing this step.
+While exploring, does anything else stand out to you (perhaps any surprising insights?)` <br> 
+When working with k-mean clustering it is important that all features are on the same scale. Recall with k-means algorithm it calculates the distance between points. If we failed to scale, then points with a higher value will skew the calculations and likely those calculated would be inaccurate.
+
+Referring to the chart below, the x-labels were removed to reduce the amount of clutter on the axis since there are so many features. We can visually see the importance of standardization. Before standardization, our features ranged from 0 to over 1200. After standardization, all features are between -3 and 4. The standardized data will perform much better.
+
+<img src="images/Scaled_comparison.png" alt="Description" width="800" height="700" />
+
+One method of visualizing relationships is through correlation heat map.   Crimes such as bribery, disorderly conduct, and hacking contain a lot of darker colors.  This indicates slightly negative association which means as one crime increase the other crime decreases.
+
+**Talk more about relationships**
+<img src="images/correl_map.png" alt="Description" width="800" height="700" />
+
+
 
 ### **Modeling(Clustering)**
-`What model(s) do you use to try to solve your problem? Why do you choose those model(s)?
+`What model(s) do you use to try to solve your problem? Why do you choose those model(s)?For example, why choose k-means over agglomerative, or vice versa? Or perhaps experiment with both and discuss the pros/cons of each? You may also try experimenting with other methods of clustering not discussed in class.`
 
-For example, why choose k-means over agglomerative, or vice versa? Or perhaps experiment with both and discuss the pros/cons of each? You may also try experimenting with other methods of clustering not discussed in class.`
+#### Principal Componenet Analysis (PCA)
+PCA will be used for both models to reduce the number of features in the data set while retaining the most important relationships. It reduced to just 3 combinations of features.
 
+<img src="images/PCA.png" alt="Description" width="400" height="400" />
+
+For this project, we experimented with k-means and agglomerative hierarchical clustering. 
+
+**k-means**
+
+Pros
+<ul type ="circle">
+ <li>It is easier to use and understand in comparision to Agglomerative Hierarchical Clustering.</li>
+ <li>It can handle large dataset with many features.</li>
+</ul>
+
+Cons
+<ul type ="circle">
+ <li>The user must specify the number of clusters in the beginning.</li>
+ <li>It assumes spherical and equally sized clusters. So, not suitable for all datasets.</li>
+</ul>
+
+<br>
+
+**Agglomerative Hierarchical Clustering**
+
+Pros
+<ul type ="circle">
+ <li>It does not require that the user to specify the number of clusters in advance.</li>
+ <li>It can handle non-spherical and different sized clusters.</li>
+</ul>
+
+Cons
+<ul type ="circle">
+ <li>It can be slower.</li>
+ <li>It can be computational complex.</li>
+</ul>
+
+
+
+#### **k-means**
+The process for k-means begins with deciding on the number of clusters for our data. There are 16 districts (or neighborhoods) that are now labeled 0 - 15.
+
+Rather than guessing on the number of clusters, the elbow method is used.  This method plots the variance based on the number of clusters.  The bend in the elbow is selected as the optimal number of clusters. It represents where adding more clusters does not change the sum squared distance. Based on the elbow chart below, the best number of clusters is subjective is 3, 4 or 5.
+
+<img src="images/elbow.png" alt="Description" width="400" height="400" />
+
+Another method for determining the number of clusters is silhouette.  Another method for determining the number of clusters is silhouette.  This method looks at how similar points are within the same cluster and how different points are in different clusters.  The score provides a range between 1 and -1 where 1 is the best.
+<img src="images/silhouette.png" alt="Description" width="400" height="400" />
 
 ### **Storytelling (Clustering Analysis)**
-Use this section to further analyze your clusters.
-
-What information or insights does it tell you? What have you learned? Were you able to answer your initial problems/questions (if so, discuss that)?
+`Use this section to further analyze your clusters.  What information or insights does it tell you? What have you learned? Were you able to answer your initial problems/questions (if so, discuss that)?`<br>
+For the k-means algorithm, three and four were selected for the number of clusters (k).
 
 
 ### **Impact Section**
-Discuss the possible impact of your project. This can be socially, ethically, etc. It cannot be something like "our project has no impact" or "our project has no negative impact." Even the most well-intentioned projects *could* have a negative impact. We will not be checking for "right" or "wrong" answers, but showing your critical thinking.
+`Discuss the possible impact of your project. This can be socially, ethically, etc. It cannot be something like "our project has no impact" or "our project has no negative impact." Even the most well-intentioned projects *could* have a negative impact. We will not be checking for "right" or "wrong" answers, but showing your critical thinking.`
 
 
 ### **References**
+1. https://maps.mecknc.gov/openmapping/data.html
+2. https://towardsdatascience.com/geopandas-101-plot-any-data-with-a-latitude-and-longitude-on-a-map-98e01944b972
+3. https://medium.com/@shankhanilborthakur/plotting-data-visualisation-on-the-map-of-india-using-geopandas-in-python-211bc88c1e4d
+4. CompletedCluseringDemo.ipynb
+5. https://www.statology.org/k-means-clustering-in-python/
