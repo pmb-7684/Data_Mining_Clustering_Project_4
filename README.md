@@ -173,7 +173,7 @@ Another method for determining the number of clusters is silhouette.  This metho
 #### **Agglomerative Hierarchical Clustering**
 The final method used for clustering and to determine the optimal number of clusters is Agglomerative Hierarchical Clustering.  After the visualization is  created,  horizonal lines are added to the plot.  First, we plot the highest vertical distance that does not intersect with any cluster that line is 3. Then count the number of vertical lines that cross that threshold.  For this method, 8 is the optimal number of clusters.
 
-<img src="images/dendr.png" alt="Description" width="400" height="400" />
+<img src="images/dendr.png" alt="Description" width="700" height="400" />
 
 ### **Storytelling (Clustering Analysis)**
 `Use this section to further analyze your clusters.  What information or insights does it tell you? What have you learned? Were you able to answer your initial problems/questions (if so, discuss that)?`<br>
