@@ -169,41 +169,54 @@ Below, k-means was computed for k = 2,3,4,5,6,7,8,9 and 10.  The neighborhood by
 
 <img src="images/elbow.png" alt="Description" width="400" height="400" />
 Cluster 2
-`Average distances to cluster centers 0 : 1.048895108693887
-Average distances to cluster centers  1 : 4.882079076503271`
+```
+Average distances to cluster centers 0 : 1.048895108693887
+Average distances to cluster centers  1 : 4.882079076503271
+```
 
 k = 2 is not an ideal choice.  The average distance for cluster  is far from the centroid of that cluster.
 
 <iframe src="table/group2.html" style="width:100%; height:600px; border:none;"></iframe>
 
 Cluster 3
-`Average distances to cluster centers  0 : 1.048895108693887
+
+```
+Average distances to cluster centers  0 : 1.048895108693887
 Average distances to cluster centers  1 : 3.797262823888206
-Average distances to cluster centers  2 : 3.9403778182007745`
+Average distances to cluster centers  2 : 3.9403778182007745
+```
 <iframe src="table/group3.html" style="width:100%; height:600px; border:none;"></iframe>
 
 Cluster 4
-`Average distances to cluster centers  0 : 1.048895108693887
+
+```
+Average distances to cluster centers  0 : 1.048895108693887
 Average distances to cluster centers  1 : 1.7914051320116562
 Average distances to cluster centers  2 : 3.9403778182007745
-Average distances to cluster centers  3 : 2.02173097587902`
-
+Average distances to cluster centers  3 : 2.02173097587902
+```
 <iframe src="table/group4.html" style="width:100%; height:600px; border:none;"></iframe>
 
 Cluster 5
-`Average distances to cluster centers  1 : 1.7914051320116562
+
+```
+Average distances to cluster centers  1 : 1.7914051320116562
 Average distances to cluster centers  2 : 2.412588434415901
 Average distances to cluster centers  3 : 2.02173097587902
-Average distances to cluster centers  4 : 0.0`
+Average distances to cluster centers  4 : 0.0
+```
 <iframe src="table/group5.html" style="width:100%; height:600px; border:none;"></iframe>
 
 Cluster 6
-`Average distances to cluster centers  0 : 1.048895108693887
+
+```
+Average distances to cluster centers  0 : 1.048895108693887
 Average distances to cluster centers  1 : 1.4682374763291322
 Average distances to cluster centers  2 : 1.8362119818816374
 Average distances to cluster centers  3 : 2.02173097587902
 Average distances to cluster centers  4 : 0.0
-Average distances to cluster centers  5 : 1.4339672723904813`
+Average distances to cluster centers  5 : 1.4339672723904813
+```
 <iframe src="table/group6.html" style="width:100%; height:600px; border:none;"></iframe>
 
 Another method for determining the number of clusters is silhouette.  This method compute coefficients of each point and measures how much a point is like its own cluster compared to  other clusters.  The score ranges between 1 and -1 where a high represents that the point matches the cluster.  Based on visualization, five seems to be the optimal number of clusters.
@@ -212,13 +225,16 @@ Another method for determining the number of clusters is silhouette.  This metho
 
 
 Cluster 7
-`Average distances to cluster centers  0 : 1.048895108693887
+
+```
+Average distances to cluster centers  0 : 1.048895108693887
 Average distances to cluster centers  1 : 1.4682374763291322
 Average distances to cluster centers  2 : 1.1335497740018676
 Average distances to cluster centers  3 : 1.3122798082020588
 Average distances to cluster centers  4 : 0.0
 Average distances to cluster centers  5 : 1.4339672723904813
-Average distances to cluster centers  6 : 1.5523602775977956`
+Average distances to cluster centers  6 : 1.5523602775977956
+```
 <iframe src="table/group5.html" style="width:100%; height:600px; border:none;"></iframe>
 
 
@@ -229,14 +245,17 @@ The second method used for clustering and to determine the optimal number of clu
 <img src="images/dendr.png" alt="Description" width="700" height="400" />
 
 Cluster 8
-`Average distances to cluster centers  0 : 0.0
+
+```
+Average distances to cluster centers  0 : 0.0
 Average distances to cluster centers  1 : 1.1335497740018676
 Average distances to cluster centers  2 : 1.3122798082020588
 Average distances to cluster centers  3 : 0.0
 Average distances to cluster centers  4 : 1.4682374763291322
 Average distances to cluster centers  5 : 1.4339672723904813
 Average distances to cluster centers  6 : 1.5523602775977956
-Average distances to cluster centers  7 : 0.08850868075261464`
+Average distances to cluster centers  7 : 0.08850868075261464
+```
 <iframe src="table/group8.html" style="width:100%; height:600px; border:none;"></iframe>
 
 ### **Storytelling (Clustering Analysis)**
