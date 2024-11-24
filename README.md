@@ -17,13 +17,13 @@ City of Charlotte[ GIS](https://maps.mecknc.gov/openmapping/data.html)
 
 
 ### **What is clustering and how does it work?**
-`Explain what clustering is and how it works (e.g., k-means and/or agglomerative that we have gone over in class).`<br> 
-`**How does this step relate to your modeling?**` <br> 
 In general, clustering is the process of grouping items with common characteristics into a group.
 
-K-means is an unsupervised algorithm used for clustering. The algorithm works by dividing a group of observations into a predetermined number of clusters. This number of clusters (k) is determined by the user. The user can either randomly select a number or use a method such as "elbow method" to calculate the number of clusters. Then k data are randomly selected to be centroid(center of the cluster). Each observation is assigned to a centroid based on distance to the closest centroid. Once all observations are assigned, recalculate the centroid by taking the average of the points assignment to the cluster. then determine the distance and reassign each observation. The algorithm is repeated until the centroids no longer move, no data points change clusters, or the maximum number of iterations is reached.
+**K-means** is an unsupervised algorithm used for clustering. The algorithm works by dividing a group of observations into a predetermined number of clusters. This number of clusters (k) is determined by the user. The user can either randomly select a number or use a method such as "elbow method" to calculate the number of clusters. <br>
 
-Agglomerative Clustering is another clustering algorithm.  It works by splitting and merging the closest pairs of clusters until all the observations belong to a single cluster.
+Once k is decided, k data points are randomly selected to be the centroids (centers of the clusters). Each observation is then assigned to the nearest centroid based on distance. After all observations are assigned, the centroids are recalculated by averaging the points assigned to each cluster. This process of determining distances and reassigning observations is repeated until the centroids no longer move, no data points change clusters, or the maximum number of iterations is reached. This iterative process ensures that the clusters are as compact and well-separated as possible. 
+
+**Agglomerative Clustering** is another clustering algorithm.  It works by splitting and merging the closest pairs of clusters until all the observations belong to a single cluster.
 
 ### **The Dataset**
 
@@ -111,8 +111,6 @@ Lastly, the data needs to be standardized. `CLT_standard_norm = pd.DataFrame(Sta
 Finally, we have a dataframe with 72 features and 16 observations.
 
 ### **Data Understanding/Visualization**
-`Use methods to try to further understand and visualize the data. Make sure to remember your initial problems/questions when completing this step.
-While exploring, does anything else stand out to you (perhaps any surprising insights?)` <br> 
 When working with k-mean clustering it is important that all features are on the same scale. Recall with k-means algorithm it calculates the distance between points. If we failed to scale, then points with a higher value will skew the calculations and likely those calculated would be inaccurate.
 
 Referring to the chart below, the x-labels were removed to reduce the amount of clutter on the axis since there are so many features. We can visually see the importance of standardization. Before standardization, our features ranged from 0 to over 1200. After standardization, all features are between -3 and 4. The standardized data will perform much better.
@@ -124,17 +122,8 @@ One method of visualizing relationships is through correlation heat map.   Crime
 **Talk more about relationships**
 <img src="images/correl_map.png" alt="Description" width="800" height="700" />
 
-
-
 ### **Modeling(Clustering)**
-`What model(s) do you use to try to solve your problem? Why do you choose those model(s)?For example, why choose k-means over agglomerative, or vice versa? Or perhaps experiment with both and discuss the pros/cons of each? You may also try experimenting with other methods of clustering not discussed in class.`
-
-#### Principal Componenet Analysis (PCA)
-PCA will be used for both models to reduce the number of features in the data set while retaining the most important relationships. It reduced to just 3 combinations of features.
-
-<img src="images/PCA.png" alt="Description" width="400" height="400" />
-
-For this project, we experimented with k-means and agglomerative hierarchical clustering. 
+For this project, we experimented with k-means and agglomerative.  Both algorithms require the data to be standardized. Also, PCA is used to reduce the number of features in the data set while retaining the most important relationships.  Recall the goal is to determine if there are similarities between neighborhoods.  By using clustering we can see those groupings.
 
 **k-means**
 
@@ -148,9 +137,7 @@ Cons
 <ul type ="circle">
  <li>The user must specify the number of clusters in the beginning.</li>
  <li>It assumes spherical and equally sized clusters. So, not suitable for all datasets.</li>
-</ul>
-
-<br>
+</ul>  <br>
 
 **Agglomerative Hierarchical Clustering**
 
@@ -166,17 +153,27 @@ Cons
  <li>It can be computational complex.</li>
 </ul>
 
+#### Principal Componenet Analysis (PCA)
+PCA will be used for both models to reduce the number of features in the data set while retaining the most important relationships. It reduced to just 3 combinations of features.
+
+<img src="images/PCA.png" alt="Description" width="400" height="400" />
 
 
 #### **k-means**
 The process for k-means begins with deciding on the number of clusters for our data. There are 16 districts (or neighborhoods) that are now labeled 0 - 15.
 
-Rather than guessing on the number of clusters, the elbow method is used.  This method plots the variance based on the number of clusters.  The bend in the elbow is selected as the optimal number of clusters. It represents where adding more clusters does not change the sum squared distance. Based on the elbow chart below, the best number of clusters is subjective is 3, 4 or 5.
+Rather than guessing on the number of clusters, the elbow method is used. This method plots the variance based on the number of clusters. The bend in the elbow is selected as the optimal number of clusters. It represents where adding more clusters does not change the sum squared distance of each point to its centroid. Pick the k value, where the average distance falls. Based on the elbow chart below, there is a sudden fall in average distance at the best number of clusters is 2, 3, 4, and 5. The value of k can be subjective.
 
 <img src="images/elbow.png" alt="Description" width="400" height="400" />
 
-Another method for determining the number of clusters is silhouette.  Another method for determining the number of clusters is silhouette.  This method looks at how similar points are within the same cluster and how different points are in different clusters.  The score provides a range between 1 and -1 where 1 is the best.
+Another method for determining the number of clusters is silhouette.  This method compute coefficients of each point and measures how much a point is like its own cluster compared to  other clusters.  The score ranges between 1 and -1 where a high represents that the point matches the cluster.  Based on visualization, five seems to be the optimal number of clusters.
+
 <img src="images/silhouette.png" alt="Description" width="400" height="400" />
+
+#### **Agglomerative Hierarchical Clustering**
+The final method used for clustering and to determine the optimal number of clusters is Agglomerative Hierarchical Clustering.  After the visualization is  created,  horizonal lines are added to the plot.  First, we plot the highest vertical distance that does not intersect with any cluster that line is 3. Then count the number of vertical lines that cross that threshold.  For this method, 8 is the optimal number of clusters.
+
+<img src="images/dendr.png" alt="Description" width="400" height="400" />
 
 ### **Storytelling (Clustering Analysis)**
 `Use this section to further analyze your clusters.  What information or insights does it tell you? What have you learned? Were you able to answer your initial problems/questions (if so, discuss that)?`<br>
