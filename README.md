@@ -172,6 +172,19 @@ Another method for determining the number of clusters is silhouette.  This metho
 <img src="images/silhouette.png" alt="Description" width="400" height="400" />
 
 Cluster 4
+<script>
+  d3.csv('table/group4.csv').then(function(data) {
+    var tbody = d3.select("#data-table tbody");
+    
+    data.forEach(function(d) {
+      var row = tbody.append("tr");
+      row.append("td").text(d.Clusters);
+      row.append("td").text(d.Division);
+      row.append("td").text(d.Size);
+    });
+  });
+</script>
+
 
 
 #### **Agglomerative Hierarchical Clustering**
