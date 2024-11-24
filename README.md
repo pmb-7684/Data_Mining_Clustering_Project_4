@@ -160,9 +160,10 @@ PCA will be used for both models to reduce the number of features in the data se
 
 
 #### **k-means**
-The process for k-means begins with deciding on the number of clusters for our data. There are 16 districts (or neighborhoods) that are now labeled 0 - 15.
+The process for k-means begins with deciding on the number of clusters in the data. There are 16 districts (or neighborhoods) that are now labeled 0 - 15.
 
-Rather than guessing on the number of clusters, the elbow method is used. This method plots the variance based on the number of clusters. The bend in the elbow is selected as the optimal number of clusters. It represents where adding more clusters does not change the sum squared distance of each point to its centroid. Pick the k value, where the average distance falls. Based on the elbow chart below, there is a sudden fall in average distance at the best number of clusters is 2, 3, 4, and 5. The value of k can be subjective.
+#### elbow method
+Rather than guessing on the number of clusters, the elbow method was used. This method plots the variance based on the number of clusters. The bend in the elbow is selected as the optimal number of clusters. It represents where adding more clusters does not change the sum squared distance of each point to its centroid. Pick the k value, where the average distance falls. Based on the elbow chart below, there is a sudden fall in average distance at the best number of clusters is 2, 3, 4, and 5. The value of k can be subjective.
 
 <img src="images/elbow.png" alt="Description" width="400" height="400" />
 
@@ -170,8 +171,11 @@ Another method for determining the number of clusters is silhouette.  This metho
 
 <img src="images/silhouette.png" alt="Description" width="400" height="400" />
 
+Cluster 4
+
+
 #### **Agglomerative Hierarchical Clustering**
-The final method used for clustering and to determine the optimal number of clusters is Agglomerative Hierarchical Clustering.  After the visualization is  created,  horizonal lines are added to the plot.  First, we plot the highest vertical distance that does not intersect with any cluster that line is 3. Then count the number of vertical lines that cross that threshold.  For this method, 8 is the optimal number of clusters.
+The second method used for clustering and to determine the optimal number of clusters is Agglomerative Hierarchical Clustering.  After the visualization is  created,  horizonal lines are added to the plot.  First, we plot the highest vertical distance that does not intersect with any cluster that line is 3. Then count the number of vertical lines that cross that threshold.  For this method, 8 is the optimal number of clusters.
 
 <img src="images/dendr.png" alt="Description" width="700" height="400" />
 
