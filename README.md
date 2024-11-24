@@ -189,6 +189,9 @@ For the k-means algorithm, three and four were selected for the number of cluste
 ### **Impact Section**
 `Discuss the possible impact of your project. This can be socially, ethically, etc. It cannot be something like "our project has no impact" or "our project has no negative impact." Even the most well-intentioned projects *could* have a negative impact. We will not be checking for "right" or "wrong" answers, but showing your critical thinking.`
 
+When technology is used in crime prevention, it can be both positive and negative. The positive impact is that law enforcement could meet with city officials to discuss ways to reduce crime by increasing lighting in areas, increased police patrols in certain or talking with community groups who are able to go into the neighborhoods (along with law enforcement) to make a positive impact. In addition,by clustering neighborhoods, if we find a solution that works within one neighborhood in a cluster, it might be appropiate to try it in a similar neighborhood.
+
+On the negative side, law enforcement could decide to increase patrols in certain areas to the point that everyone in the community feels as if they were under surveillance. It's possible that crime could be reduced, because the criminals are leaving one area and moving to another area.
 
 ### **References**
 1. https://maps.mecknc.gov/openmapping/data.html
