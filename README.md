@@ -1,7 +1,7 @@
 ## **Charlotte's Neighborhood Crime Over Time Through Clustering**
 
 ### **Overview**
-For Project 4, the goal is to work with clustering.  Writing is critical here, as the main goal will be to discuss your process, why you take certain steps (e.g., what preprocessing steps and why), and tell a story around your data and insights gained through both modeling (working with the clustering algorithms we learned about) and visualizations. Thus, your writing should portray your critical thinking about the data, the process, and what knowledge you find.
+For Project 4, the goal is to work with clustering.  Writing is critical here, as the main goal will be to discuss your process, why you take certain steps, and tell a story around your data and insights gained through both modeling and visualizations. Thus, your writing should portray your critical thinking about the data, the process, and what knowledge you find.
 
 ##  **Introduction**
 Crime is a concern for many urban areas in the United States, and Charlotte is no exception. It is important to understand crime patterns and statistics to help communities and law enforcement agencies develop plans, allocate resources, and engage with the community to improve public safety. The Charlotte-Mecklenburg Police Department (CMPD) regularly publishes detailed crime reports. As of July 22, 2024, overall crime in Charlotte has seen a slight increase of 1% compared to the previous year. This includes various types of crimes, categorized broadly into violent crimes and property crimes.
@@ -163,16 +163,63 @@ PCA will be used for both models to reduce the number of features in the data se
 The process for k-means begins with deciding on the number of clusters in the data. There are 16 districts (or neighborhoods) that are now labeled 0 - 15.
 
 #### elbow method
-Rather than guessing on the number of clusters, the elbow method was used. This method plots the variance based on the number of clusters. The bend in the elbow is selected as the optimal number of clusters. It represents where adding more clusters does not change the sum squared distance of each point to its centroid. Pick the k value, where the average distance falls. Based on the elbow chart below, there is a sudden fall in average distance at the best number of clusters is 2, 3, 4, and 5. The value of k can be subjective.
+Rather than guessing on the number of clusters, the elbow method was used. This method plots the variance based on the number of clusters. The bend in the elbow is selected as the optimal number of clusters. It represents where adding more clusters does not change the sum squared distance of each point to its centroid. Pick the k value, where the average distance falls. Based on the elbow chart below, there is a sudden fall in average distance at the best number of clusters is 2, 3, 4, and 5. The value of k can be subjective. 
+
+Below, k-means was computed for k = 2,3,4,5,6,7,8,9 and 10.  The neighborhood by cluster and their average distance.  The average distance was computed using the following `  average_distances = np.mean(cluster_distances) .`  Recall, the best valu
 
 <img src="images/elbow.png" alt="Description" width="400" height="400" />
+Cluster 2
+`Average distances to cluster centers 0 : 1.048895108693887
+Average distances to cluster centers  1 : 4.882079076503271`
+
+k = 2 is not an ideal choice.  The average distance for cluster  is far from the centroid of that cluster.
+
+<iframe src="table/group2.html" style="width:100%; height:600px; border:none;"></iframe>
+
+Cluster 3
+`Average distances to cluster centers  0 : 1.048895108693887
+Average distances to cluster centers  1 : 3.797262823888206
+Average distances to cluster centers  2 : 3.9403778182007745`
+<iframe src="table/group3.html" style="width:100%; height:600px; border:none;"></iframe>
+
+Cluster 4
+`Average distances to cluster centers  0 : 1.048895108693887
+Average distances to cluster centers  1 : 1.7914051320116562
+Average distances to cluster centers  2 : 3.9403778182007745
+Average distances to cluster centers  3 : 2.02173097587902`
+
+<iframe src="table/group4.html" style="width:100%; height:600px; border:none;"></iframe>
+
+Cluster 5
+`Average distances to cluster centers  1 : 1.7914051320116562
+Average distances to cluster centers  2 : 2.412588434415901
+Average distances to cluster centers  3 : 2.02173097587902
+Average distances to cluster centers  4 : 0.0`
+<iframe src="table/group5.html" style="width:100%; height:600px; border:none;"></iframe>
+
+Cluster 6
+`Average distances to cluster centers  0 : 1.048895108693887
+Average distances to cluster centers  1 : 1.4682374763291322
+Average distances to cluster centers  2 : 1.8362119818816374
+Average distances to cluster centers  3 : 2.02173097587902
+Average distances to cluster centers  4 : 0.0
+Average distances to cluster centers  5 : 1.4339672723904813`
+<iframe src="table/group6.html" style="width:100%; height:600px; border:none;"></iframe>
 
 Another method for determining the number of clusters is silhouette.  This method compute coefficients of each point and measures how much a point is like its own cluster compared to  other clusters.  The score ranges between 1 and -1 where a high represents that the point matches the cluster.  Based on visualization, five seems to be the optimal number of clusters.
 
 <img src="images/silhouette.png" alt="Description" width="400" height="400" />
 
-Cluster 4
-<iframe src="table/group4.html" style="width:100%; height:600px; border:none;"></iframe>
+
+Cluster 7
+`Average distances to cluster centers  0 : 1.048895108693887
+Average distances to cluster centers  1 : 1.4682374763291322
+Average distances to cluster centers  2 : 1.1335497740018676
+Average distances to cluster centers  3 : 1.3122798082020588
+Average distances to cluster centers  4 : 0.0
+Average distances to cluster centers  5 : 1.4339672723904813
+Average distances to cluster centers  6 : 1.5523602775977956`
+<iframe src="table/group5.html" style="width:100%; height:600px; border:none;"></iframe>
 
 
 
@@ -181,21 +228,32 @@ The second method used for clustering and to determine the optimal number of clu
 
 <img src="images/dendr.png" alt="Description" width="700" height="400" />
 
+Cluster 8
+`Average distances to cluster centers  0 : 0.0
+Average distances to cluster centers  1 : 1.1335497740018676
+Average distances to cluster centers  2 : 1.3122798082020588
+Average distances to cluster centers  3 : 0.0
+Average distances to cluster centers  4 : 1.4682374763291322
+Average distances to cluster centers  5 : 1.4339672723904813
+Average distances to cluster centers  6 : 1.5523602775977956
+Average distances to cluster centers  7 : 0.08850868075261464`
+<iframe src="table/group8.html" style="width:100%; height:600px; border:none;"></iframe>
+
 ### **Storytelling (Clustering Analysis)**
 `Use this section to further analyze your clusters.  What information or insights does it tell you? What have you learned? Were you able to answer your initial problems/questions (if so, discuss that)?`<br>
 For the k-means algorithm, three and four were selected for the number of clusters (k).
 
 
 ### **Impact Section**
-`Discuss the possible impact of your project. This can be socially, ethically, etc. It cannot be something like "our project has no impact" or "our project has no negative impact." Even the most well-intentioned projects *could* have a negative impact. We will not be checking for "right" or "wrong" answers, but showing your critical thinking.`
+From the analysis we were able to see that some neighborhoods have similar types of crime.  This can be beneficial if a proposal or recommendation works for one area within a cluster, it might be a good suggestion to try the same recommendation on a neighborhood in that cluster.
 
 When technology is used in crime prevention, it can be both positive and negative. The positive impact is that law enforcement could meet with city officials to discuss ways to reduce crime by increasing lighting in areas, increased police patrols in certain or talking with community groups who are able to go into the neighborhoods (along with law enforcement) to make a positive impact. In addition,by clustering neighborhoods, if we find a solution that works within one neighborhood in a cluster, it might be appropiate to try it in a similar neighborhood.
 
 On the negative side, law enforcement could decide to increase patrols in certain areas to the point that everyone in the community feels as if they were under surveillance. It's possible that crime could be reduced, because the criminals are leaving one area and moving to another area.
 
 ### **References**
-1. https://maps.mecknc.gov/openmapping/data.html
-2. https://towardsdatascience.com/geopandas-101-plot-any-data-with-a-latitude-and-longitude-on-a-map-98e01944b972
-3. https://medium.com/@shankhanilborthakur/plotting-data-visualisation-on-the-map-of-india-using-geopandas-in-python-211bc88c1e4d
+1. References from project 1 - Data Exploration
 4. CompletedCluseringDemo.ipynb
 5. https://www.statology.org/k-means-clustering-in-python/
+6. https://towardsdatascience.com/machine-learning-algorithms-part-12-hierarchical-agglomerative-clustering-example-in-python-1e18e0075019
+7. https://towardsdatascience.com/silhouette-method-better-than-elbow-method-to-find-optimal-clusters-378d62ff6891
