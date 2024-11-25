@@ -17,7 +17,7 @@ City of Charlotte[ GIS](https://maps.mecknc.gov/openmapping/data.html)
 
 The complete jupyter notebook is [here.](https://colab.research.google.com/drive/1ZZhK84cg-rFe9xzMKBNEbsdBWii1uGIm?usp=sharing)
 
-<img src="images/cmpd_division.png" alt="Description" width="700" height="400" />
+<img src="images/cmpd_division.jpg" alt="Description" width="700" height="400" />
 
 ### **What is clustering and how does it work?**
 In general, clustering is the process of grouping items with common characteristics into a group.
