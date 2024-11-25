@@ -173,9 +173,6 @@ Cluster 2
 Average distances to cluster centers 0 : 1.048895108693887
 Average distances to cluster centers  1 : 4.882079076503271
 ```
-
-k = 2 is not an ideal choice.  The average distance for cluster  is far from the centroid of that cluster.
-
 <iframe src="table/group2.html" style="width:100%; height:600px; border:none;"></iframe>
 
 Cluster 3
@@ -200,6 +197,7 @@ Average distances to cluster centers  3 : 2.02173097587902
 Cluster 5
 
 ```
+Average distances to cluster centers  0 : 1.048895108693887
 Average distances to cluster centers  1 : 1.7914051320116562
 Average distances to cluster centers  2 : 2.412588434415901
 Average distances to cluster centers  3 : 2.02173097587902
@@ -235,9 +233,7 @@ Average distances to cluster centers  4 : 0.0
 Average distances to cluster centers  5 : 1.4339672723904813
 Average distances to cluster centers  6 : 1.5523602775977956
 ```
-<iframe src="table/group5.html" style="width:100%; height:600px; border:none;"></iframe>
-
-
+<iframe src="table/group7.html" style="width:100%; height:600px; border:none;"></iframe>
 
 #### **Agglomerative Hierarchical Clustering**
 The second method used for clustering and to determine the optimal number of clusters is Agglomerative Hierarchical Clustering.  After the visualization is  created,  horizonal lines are added to the plot.  First, we plot the highest vertical distance that does not intersect with any cluster that line is 3. Then count the number of vertical lines that cross that threshold.  For this method, 8 is the optimal number of clusters.
