@@ -15,6 +15,9 @@ CMPD Data [Portal](https://data.charlottenc.gov/datasets/charlotte::cmpd-inciden
 
 City of Charlotte[ GIS](https://maps.mecknc.gov/openmapping/data.html)
 
+The complete jupyter notebook is [here.](https://colab.research.google.com/drive/1ZZhK84cg-rFe9xzMKBNEbsdBWii1uGIm?usp=sharing)
+
+<img src="images/cmpd_division.png" alt="Description" width="700" height="400" />
 
 ### **What is clustering and how does it work?**
 In general, clustering is the process of grouping items with common characteristics into a group.
@@ -256,11 +259,32 @@ Average distances to cluster centers  7 : 0.08850868075261464
 
 ### **Storytelling (Clustering Analysis)**
 `Use this section to further analyze your clusters.  What information or insights does it tell you? What have you learned? Were you able to answer your initial problems/questions (if so, discuss that)?`<br>
-For the k-means algorithm, three and four were selected for the number of clusters (k).
+Let's look at the k = 2, 3, 4, 5, and 6.
+
+k = 2 is not an ideal choice.  The average distance for cluster 0 is okay; however, the average distance for cluster 1 is far from the centroid at 4.88. Cluster 1 is not optimal and should be split further.
+
+k = 3 is not an ideal choice.  The average distance for cluster 0 remained the same and there was no change to the neighborhoods included. (Airport, Davidson, and Huntersville)  The other Cluster was split into 2 clusters; however, those average distances are still higher with 3.79 and 3.94 respectively. 
+
+k = 4 is not an ideal choice.  Cluster 0 remained the same.  Cluster 1 is improving with an average distance of 1.79 (Freedom, Metro, North Tryon, Westover).  The other 2 clusters have higher average distances with 3.94 and 2.02.
+
+k = 5 shows improvement but it is not an ideal choice.  Cluster 0 continues to remain unchanged. Also, cluster 1 remained unchanged.  Cluster 4 contains one neighborhood with distance of 0.  Cluster 2 and 3 continue to have an opportunity for improvement with 2.41 and 2.02 respectively.
+
+k = 6 again with see improvements within the clusters. Clusters 0, 1,and 4 remain unchanged. Cluster 2 is 1.83. Cluster 3 is 2.02 and cluster 5 is 1.43.  This is the optimal value based on the elbow method
+
+Before looking at k = 8 for Agglomerate hierarchical clustering, let's check out the results for k=7.
+
+k = 7 now all clusters with an average distance less than 2.  Cluster 0, 1, and 4 continue to remain unchanged.
+
+k = 8 for agglomerate hierarchical clustering continues to have all average distances under 2.  However, cluster 0 which contained airport, Davidson, and Huntersville from k =2,3,4,and 5, now only contains the Airport.  Davidson, and Huntersville are together in cluster 7.  Since Davidson, and Huntersville are in the same area of Mecklenburg County it makes sense for them to be clustered together.  It is also understandable to have the Airport in a cluster by itself.  Now, Central and Airport are clustered by themselves.
+
+
+For this experiment, k= 7 or 8 are the optimal values.  I think k= 7 is better since it only has one neighborhood in a cluster by itself.  As the number of clusters increases, there is a point where there are too many clusters.  Also, the average distance for all clusters is below 2.
+The one thing that surprised me with `Central` division and the fact that it's by itself in a cluster.  I would have thought it would fall into Eastway. It indicates how much that area has changed over the years.
+
 
 
 ### **Impact Section**
-From the analysis we were able to see that some neighborhoods have similar types of crime.  This can be beneficial if a proposal or recommendation works for one area within a cluster, it might be a good suggestion to try the same recommendation on a neighborhood in that cluster.
+From the analysis we were able to see that some neighborhoods have similar types of crime.  This can be beneficial if a proposal or recommendation works for one area within a cluster, it might be a good suggestion to try the same recommendation on a neighborhood in that cluster.  Using this approach the city could save money by relying on methods that work rather than spending on studies to research a problem.
 
 When technology is used in crime prevention, it can be both positive and negative. The positive impact is that law enforcement could meet with city officials to discuss ways to reduce crime by increasing lighting in areas, increased police patrols in certain or talking with community groups who are able to go into the neighborhoods (along with law enforcement) to make a positive impact. In addition,by clustering neighborhoods, if we find a solution that works within one neighborhood in a cluster, it might be appropiate to try it in a similar neighborhood.
 
