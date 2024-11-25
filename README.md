@@ -120,7 +120,7 @@ When working with k-mean clustering it is important that all features are on the
 
 Referring to the chart below, the x-labels were removed to reduce the amount of clutter on the axis since there are so many features. We can visually see the importance of standardization. Before standardization, our features ranged from 0 to over 1200. After standardization, all features are between -3 and 4. The standardized data will perform much better.
 
-<img src="images/Scaled_comparison.png" alt="Description" width="800" height="700" />
+<img src="images/Scaled_comparison.png" alt="Description" width="800" height="500" />
 
 One method of visualizing relationships is through correlation heat map.   Crimes such as bribery, disorderly conduct, and hacking contain a lot of darker colors.  This indicates slightly negative association which means as one crime increase the other crime decreases.
 
