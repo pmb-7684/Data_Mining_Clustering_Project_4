@@ -135,11 +135,13 @@ Pros
 <ul type ="circle">
  <li>It is easier to use and understand in comparision to Agglomerative Hierarchical Clustering.</li>
  <li>It can handle large dataset with many features.</li>
+ <li>It allows initial placement of the centroids.</li>
 </ul>
 
 Cons
 <ul type ="circle">
  <li>The user must specify the number of clusters in the beginning.</li>
+ <li>The results depend on initial values.</li>
  <li>It assumes spherical and equally sized clusters. So, not suitable for all datasets.</li>
 </ul>  <br>
 
@@ -298,3 +300,4 @@ On the negative side, law enforcement could decide to increase patrols in certai
 6. https://towardsdatascience.com/machine-learning-algorithms-part-12-hierarchical-agglomerative-clustering-example-in-python-1e18e0075019
 7. https://towardsdatascience.com/silhouette-method-better-than-elbow-method-to-find-optimal-clusters-378d62ff6891
 8. https://www.charlottenc.gov/cmpd/ePolicing-Resources/Patrol-Area-Divisions
+9. https://developers.google.com/machine-learning/clustering/kmeans/advantages-disadvantages
