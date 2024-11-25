@@ -122,8 +122,7 @@ Referring to the chart below, the x-labels were removed to reduce the amount of 
 
 One method of visualizing relationships is through correlation heat map.   Crimes such as bribery, disorderly conduct, and hacking contain a lot of darker colors.  This indicates slightly negative association which means as one crime increase the other crime decreases.
 
-**Talk more about relationships**
-<img src="images/correl_map.png" alt="Description" width="800" height="700" />
+<img src="images/correl_map.png" alt="Description" width="600" height="500" />
 
 ### **Modeling(Clustering)**
 For this project, we experimented with k-means and agglomerative.  Both algorithms require the data to be standardized. Also, PCA is used to reduce the number of features in the data set while retaining the most important relationships.  Recall the goal is to determine if there are similarities between neighborhoods.  By using clustering we can see those groupings.
@@ -171,10 +170,11 @@ Rather than guessing on the number of clusters, the elbow method was used. This 
 Below, k-means was computed for k = 2,3,4,5,6,7,8,9 and 10.  The neighborhood by cluster and their average distance.  The average distance was computed using the following `  average_distances = np.mean(cluster_distances) .`  Recall, the best valu
 
 <img src="images/elbow.png" alt="Description" width="400" height="400" />
+
 Cluster 2
 ```
 Average distances to cluster centers 0 : 1.048895108693887
-Average distances to cluster centers  1 : 4.882079076503271
+Average distances to cluster centers 1 : 4.882079076503271
 ```
 <iframe src="table/group2.html" style="width:100%; height:600px; border:none;"></iframe>
 
@@ -258,8 +258,7 @@ Average distances to cluster centers  7 : 0.08850868075261464
 <iframe src="table/group8.html" style="width:100%; height:600px; border:none;"></iframe>
 
 ### **Storytelling (Clustering Analysis)**
-`Use this section to further analyze your clusters.  What information or insights does it tell you? What have you learned? Were you able to answer your initial problems/questions (if so, discuss that)?`<br>
-Let's look at the k = 2, 3, 4, 5, and 6.
+Let's look at the k = 2, 3, 4, 5, and 6 for k-means.
 
 k = 2 is not an ideal choice.  The average distance for cluster 0 is okay; however, the average distance for cluster 1 is far from the centroid at 4.88. Cluster 1 is not optimal and should be split further.
 
@@ -296,3 +295,4 @@ On the negative side, law enforcement could decide to increase patrols in certai
 5. https://www.statology.org/k-means-clustering-in-python/
 6. https://towardsdatascience.com/machine-learning-algorithms-part-12-hierarchical-agglomerative-clustering-example-in-python-1e18e0075019
 7. https://towardsdatascience.com/silhouette-method-better-than-elbow-method-to-find-optimal-clusters-378d62ff6891
+8. https://www.charlottenc.gov/cmpd/ePolicing-Resources/Patrol-Area-Divisions
