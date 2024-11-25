@@ -26,7 +26,9 @@ In general, clustering is the process of grouping items with common characterist
 
 Once k is decided, k data points are randomly selected to be the centroids (centers of the clusters). Each observation is then assigned to the nearest centroid based on distance. After all observations are assigned, the centroids are recalculated by averaging the points assigned to each cluster. This process of determining distances and reassigning observations is repeated until the centroids no longer move, no data points change clusters, or the maximum number of iterations is reached. This iterative process ensures that the clusters are as compact and well-separated as possible. 
 
-**Agglomerative Clustering** is another clustering algorithm.  It works by splitting and merging the closest pairs of clusters until all the observations belong to a single cluster.
+**Agglomerative Hierarchical Clustering** is another clustering algorithm which takes a bottom-up approach.  It works by splitting and grouping data points together that are close to one another based on distance.  The splitting and grouping process is repeated until all points are contained in a single cluster.  It is normally visualized as a dendrogram, a tree-like structure that shows relationships.  Larger clusters are at the top while individual points are at the bottom of the dendrogram.
+
+The optimal number of clusters are determined by reading the vertical lines on the dendrogram.  A horizontal line is drawn on the dendrogram that does not intersect any of the other clusters.  The optimal number of clusters is equal to the number of vertical lines that cross that horizontal line.
 
 ### **The Dataset**
 
