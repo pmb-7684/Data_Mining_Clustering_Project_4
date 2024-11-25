@@ -15,7 +15,7 @@ CMPD Data [Portal](https://data.charlottenc.gov/datasets/charlotte::cmpd-inciden
 
 City of Charlotte[ GIS](https://maps.mecknc.gov/openmapping/data.html)
 
-The complete jupyter notebook is [here.](https://colab.research.google.com/drive/1ZZhK84cg-rFe9xzMKBNEbsdBWii1uGIm?usp=sharing)
+The full jupyter notebook can be found [here.](https://colab.research.google.com/drive/1ZZhK84cg-rFe9xzMKBNEbsdBWii1uGIm?usp=sharing)
 
 <img src="images/cmpd_division.jpg" alt="Description" width="700" height="400" />
 
